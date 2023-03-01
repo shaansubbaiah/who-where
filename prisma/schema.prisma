@@ -55,10 +55,12 @@ model VerificationToken {
 }
 
 model Vote {
-  id       String   @id @default(cuid())
-  date     DateTime
+  id       String @id @default(cuid())
+  date     String
   location String
   userId   String
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
 }
