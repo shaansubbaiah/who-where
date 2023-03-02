@@ -1,13 +1,28 @@
 import { useSession } from "next-auth/react";
-import { Select, Text, Stack, Center, Flex, ActionIcon } from "@mantine/core";
+import {
+  Select,
+  Text,
+  Stack,
+  Center,
+  Flex,
+  ActionIcon,
+  createStyles,
+} from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { IconCheck } from "@tabler/icons";
 import dayjs from "dayjs";
 
+const useStyles = createStyles((theme) => ({
+  fullWidth: {
+    width: "100%",
+  },
+}));
 const VoteBox = ({ selectedDate }) => {
   const { data: session } = useSession();
 
   const validLocations = ["Manyata", "EGL", "Chennai", "Home"];
+
+  const { classes } = useStyles();
 
   const form = useForm({
     initialValues: {
@@ -28,7 +43,7 @@ const VoteBox = ({ selectedDate }) => {
 
   if (session)
     return (
-      <Stack align="center" spacing={0} w={300}>
+      <Stack align="center" spacing={0}>
         <Text fw={600} fz="xs" c="dimmed">
           VOTE
         </Text>
@@ -39,9 +54,7 @@ const VoteBox = ({ selectedDate }) => {
             postData(formData);
             console.log(formData);
           })}
-          sx={{
-            width: "300px",
-          }}
+          className={classes.fullWidth}
         >
           <Flex
             mih={50}

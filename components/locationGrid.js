@@ -1,4 +1,4 @@
-import { Text, Avatar, Tooltip, Flex, Stack } from "@mantine/core";
+import { Text, Avatar, Tooltip, Stack, SimpleGrid, Flex } from "@mantine/core";
 
 const LocationGrid = ({ data, placeName }) => {
   return (
@@ -6,12 +6,19 @@ const LocationGrid = ({ data, placeName }) => {
       <Text fw={600} fz="sm">
         {placeName}
       </Text>
-      <Flex>
+      <Flex
+        mih={50}
+        gap="md"
+        justify="center"
+        align="flex-start"
+        direction="row"
+        wrap="wrap"
+      >
         {data.length > 0 ? (
           data.map((e) => {
             return (
-              <Stack key={e.id} align="center">
-                <Tooltip label={e.name}>
+              <Stack key={e.id} align="center" spacing={5} m={5}>
+                <Tooltip label={e.name} withArrow>
                   <Avatar
                     src={e.image}
                     alt={e.name}

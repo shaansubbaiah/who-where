@@ -15,8 +15,8 @@ export default function Home() {
   };
 
   return (
-    <Center mt={50}>
-      <Stack>
+    <Center>
+      <Stack m={"20px 5%"} maw={300}>
         <Group position="apart">
           <ColorSchemeToggle />
           <LoginButton />
