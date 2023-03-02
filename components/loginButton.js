@@ -1,6 +1,6 @@
+import { useSession, signIn, signOut } from "next-auth/react";
 import { Button, ActionIcon, Group, Text } from "@mantine/core";
 import { IconLogout } from "@tabler/icons";
-import { useSession, signIn, signOut } from "next-auth/react";
 
 const LoginButton = () => {
   const { data: session } = useSession();
@@ -9,7 +9,6 @@ const LoginButton = () => {
     return (
       <Group>
         <Text fz="sm">Hi, {session.user.name.split(" ")[0]} 👋</Text>
-        {/* <Button onClick={() => signOut()}>Sign out</Button> */}
         <ActionIcon
           variant="subtle"
           color="red"

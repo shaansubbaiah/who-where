@@ -1,14 +1,7 @@
 import { useSession } from "next-auth/react";
-import {
-  Select,
-  Group,
-  Button,
-  Text,
-  Paper,
-  Stack,
-  Center,
-} from "@mantine/core";
+import { Select, Text, Stack, Center, Flex, ActionIcon } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { IconCheck } from "@tabler/icons";
 import dayjs from "dayjs";
 
 const VoteBox = ({ selectedDate }) => {
@@ -35,45 +28,59 @@ const VoteBox = ({ selectedDate }) => {
 
   if (session)
     return (
-      <Paper shadow="md" radius="lg" p="md">
-        <Stack align="center">
-          <Text fw={600}>Vote</Text>
-          <form
-            onSubmit={form.onSubmit((values) => {
-              let formData = values;
-              formData.date = dayjs(selectedDate).format("DD/MM/YYYY");
-              postData(formData);
-              console.log(formData);
-            })}
+      <Stack align="center" spacing={0} w={300}>
+        <Text fw={600} fz="xs" c="dimmed">
+          VOTE
+        </Text>
+        <form
+          onSubmit={form.onSubmit((values) => {
+            let formData = values;
+            formData.date = dayjs(selectedDate).format("DD/MM/YYYY");
+            postData(formData);
+            console.log(formData);
+          })}
+          sx={{
+            width: "300px",
+          }}
+        >
+          <Flex
+            mih={50}
+            gap="xs"
+            justify="space-between"
+            align="flex-start"
+            direction="row"
+            wrap="nowrap"
           >
-            <Stack align="center">
-              <Select
-                // label="Location"
-                placeholder="Pick a location"
-                searchable
-                data={[
-                  { value: "Manyata", label: "BLR: Manyata" },
-                  { value: "EGL", label: "BLR: EGL" },
-                  { value: "Chennai", label: "CHN: Neville" },
-                  { value: "Home", label: "WFH: Home" },
-                ]}
-                {...form.getInputProps("location")}
-              />
+            <Select
+              placeholder="Pick a location"
+              searchable
+              data={[
+                { value: "Manyata", label: "BLR: Manyata" },
+                { value: "EGL", label: "BLR: EGL" },
+                { value: "Chennai", label: "CHN: Neville" },
+                { value: "Home", label: "WFH: Home" },
+              ]}
+              {...form.getInputProps("location")}
+            />
 
-              <Button type="submit" variant="default">
-                Submit
-              </Button>
-            </Stack>
-          </form>
-          {/* <Text c="green">{dayjs(selectedDate).format("DD/MM/YYYY")}</Text> */}
-        </Stack>
-      </Paper>
+            <ActionIcon
+              component="button"
+              type="submit"
+              variant="light"
+              color="teal"
+              size={36}
+            >
+              <IconCheck />
+            </ActionIcon>
+          </Flex>
+        </form>
+      </Stack>
     );
   else
     return (
       <Center>
-        <Text fz="sm" c="dimmed">
-          Login to vote
+        <Text fz="sm" c="dimmed" m="20px 0px">
+          ~ login to vote ~
         </Text>
       </Center>
     );

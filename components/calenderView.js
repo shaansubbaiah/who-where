@@ -1,17 +1,6 @@
-import {
-  Button,
-  Text,
-  Paper,
-  Table,
-  Stack,
-  Avatar,
-  Box,
-  Tooltip,
-  ActionIcon,
-} from "@mantine/core";
-import { IconRefresh } from "@tabler/icons";
+import useSWR from "swr";
+import { Text, Paper, Stack } from "@mantine/core";
 import dayjs from "dayjs";
-import useSWR, { mutate } from "swr";
 import LocationGrid from "./locationGrid";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -19,10 +8,10 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const CalenderView = ({ selectedDate }) => {
   const { data, error, isLoading } = useSWR("/api/vote", fetcher);
 
-  if (error) return <div>failed to load</div>;
+  if (error) return <div>I messed up, failed to load</div>;
   if (isLoading) return <div>loading...</div>;
 
-  //   console.log(data);
+  console.log(data);
 
   let dataForSelectedDate = data.content.voteData.filter(
     (e) => e.date == dayjs(selectedDate).format("DD/MM/YYYY")
@@ -54,41 +43,19 @@ const CalenderView = ({ selectedDate }) => {
   console.log("data with user info", dataWithUserInfo);
 
   return (
-    <Paper shadow="md" radius="lg" p="md">
-      {/* <ActionIcon
-        onClick={() => {
-          mutate("/api/vote");
-        }}
-        color="green"
-        radius="xl"
-      >
-        <IconRefresh size={16} />
-      </ActionIcon> */}
-      {/* <Text c="blue">{dayjs(selectedDate).format("DD/MM/YYYY")}</Text> */}
-      <Stack>
-        <LocationGrid placeName="EGL" data={atEGL} />
-        <LocationGrid placeName="Manyata" data={atManyata} />
-        <LocationGrid placeName="Chennai" data={atChennai} />
-        <LocationGrid placeName="Home" data={atHome} />
-        {/* <Box>
-          <Text>EGL</Text>
-          {atEGL.map((e) => {
-            return (
-              <Box key={e.id}>
-                <Tooltip label={e.name}>
-                  <Avatar
-                    src={e.image}
-                    alt={e.name}
-                    referrerPolicy="no-referrer"
-                  />
-                </Tooltip>
-                <Text fz="sm">{e.name.split(" ")[0]}</Text>
-              </Box>
-            );
-          })}
-        </Box> */}
-      </Stack>
-    </Paper>
+    <Stack align="center" spacing={0} w={300}>
+      <Text fw={600} fz="xs" c="dimmed">
+        VIEW
+      </Text>
+      <Paper radius="lg" p="md" withBorder w="inherit">
+        <Stack>
+          <LocationGrid placeName="EGL" data={atEGL} />
+          <LocationGrid placeName="Manyata" data={atManyata} />
+          <LocationGrid placeName="Chennai" data={atChennai} />
+          <LocationGrid placeName="Home" data={atHome} />
+        </Stack>
+      </Paper>
+    </Stack>
   );
 };
 
