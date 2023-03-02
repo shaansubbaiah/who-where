@@ -10,7 +10,7 @@ const LoginButton = () => {
       <Group>
         <Text fz="sm">Hi, {session.user.name.split(" ")[0]} 👋</Text>
         <ActionIcon
-          variant="subtle"
+          variant="light"
           color="red"
           onClick={() => signOut()}
           title="Sign Out"
@@ -22,7 +22,7 @@ const LoginButton = () => {
   }
   return (
     <Group>
-      <Button compact variant="subtle" onClick={() => signIn()}>
+      <Button compact variant="light" color="blue" onClick={() => signIn()}>
         Sign in
       </Button>
     </Group>

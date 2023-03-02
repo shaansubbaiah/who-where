@@ -1,11 +1,19 @@
-import { Text, Avatar, Tooltip, Stack, SimpleGrid, Flex } from "@mantine/core";
+import {
+  Text,
+  Avatar,
+  Tooltip,
+  Stack,
+  SimpleGrid,
+  Flex,
+  Badge,
+} from "@mantine/core";
 
-const LocationGrid = ({ data, placeName }) => {
+const LocationGrid = ({ data, placeName, color }) => {
   return (
     <Stack align="center">
-      <Text fw={600} fz="sm">
+      <Badge size="sm" radius="sm" color={color}>
         {placeName}
-      </Text>
+      </Badge>
       <Flex
         mih={50}
         gap="md"

@@ -5,22 +5,31 @@ import {
   Stack,
   Center,
   Flex,
-  ActionIcon,
+  Button,
   createStyles,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { IconCheck } from "@tabler/icons";
+import { IconMapPin } from "@tabler/icons";
 import dayjs from "dayjs";
+import locations from "./locations";
+import { useState } from "react";
+import { mutate } from "swr";
 
 const useStyles = createStyles((theme) => ({
   fullWidth: {
     width: "100%",
   },
 }));
+
+const validLocations = locations.map((e) => e.name);
+
+const selectData = locations.map((e) => {
+  return { value: e.name, label: e.label };
+});
+
 const VoteBox = ({ selectedDate }) => {
   const { data: session } = useSession();
-
-  const validLocations = ["Manyata", "EGL", "Chennai", "Home"];
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { classes } = useStyles();
 
@@ -48,11 +57,14 @@ const VoteBox = ({ selectedDate }) => {
           VOTE
         </Text>
         <form
-          onSubmit={form.onSubmit((values) => {
+          onSubmit={form.onSubmit(async (values) => {
+            setIsSubmitting(true);
             let formData = values;
             formData.date = dayjs(selectedDate).format("DD/MM/YYYY");
-            postData(formData);
+            await postData(formData);
             console.log(formData);
+            setIsSubmitting(false);
+            mutate("/api/vote");
           })}
           className={classes.fullWidth}
         >
@@ -66,17 +78,20 @@ const VoteBox = ({ selectedDate }) => {
           >
             <Select
               placeholder="Pick a location"
-              searchable
-              data={[
-                { value: "Manyata", label: "BLR: Manyata" },
-                { value: "EGL", label: "BLR: EGL" },
-                { value: "Chennai", label: "CHN: Neville" },
-                { value: "Home", label: "WFH: Home" },
-              ]}
+              icon={<IconMapPin size={16} />}
+              data={
+                selectData
+                //   [
+                //   { value: "Manyata", label: "BLR: Manyata" },
+                //   { value: "EGL", label: "BLR: EGL" },
+                //   { value: "Chennai", label: "CHN: Neville" },
+                //   { value: "Home", label: "WFH: Home" },
+                // ]
+              }
               {...form.getInputProps("location")}
             />
 
-            <ActionIcon
+            {/* <ActionIcon
               component="button"
               type="submit"
               variant="light"
@@ -84,7 +99,17 @@ const VoteBox = ({ selectedDate }) => {
               size={36}
             >
               <IconCheck />
-            </ActionIcon>
+            </ActionIcon> */}
+            <Button
+              variant="light"
+              type="submit"
+              color="teal"
+              loading={isSubmitting}
+              fullWidth
+              maw={90}
+            >
+              Submit
+            </Button>
           </Flex>
         </form>
       </Stack>

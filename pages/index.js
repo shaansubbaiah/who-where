@@ -15,30 +15,28 @@ export default function Home() {
   };
 
   return (
-    <Center>
-      <Stack m={"20px 5%"} maw={300}>
-        <Group position="apart">
-          <ColorSchemeToggle />
-          <LoginButton />
-        </Group>
+    <Stack m={"10px"}>
+      <Group position="apart">
+        <ColorSchemeToggle />
+        <LoginButton />
+      </Group>
 
-        <Stack spacing={0}>
-          <Text fw={600} fz="xs" c="dimmed" align="center">
-            DATE
-          </Text>
+      <Stack spacing={0}>
+        <Text fw={600} fz="xs" c="dimmed" align="center">
+          DATE
+        </Text>
 
-          <DatePicker
-            placeholder="Pick date"
-            withAsterisk
-            minDate={dayjs(new Date()).toDate()}
-            maxDate={dayjs(new Date()).add(90, "day").toDate()}
-            value={selectedDate}
-            onChange={onSelectedDateChange}
-          />
-        </Stack>
-        <VoteBox selectedDate={selectedDate} />
-        <CalenderView selectedDate={selectedDate} />
+        <DatePicker
+          placeholder="Pick a date :)"
+          withAsterisk
+          minDate={dayjs(new Date()).toDate()}
+          maxDate={dayjs(new Date()).add(90, "day").toDate()}
+          value={selectedDate}
+          onChange={onSelectedDateChange}
+        />
       </Stack>
-    </Center>
+      <VoteBox selectedDate={selectedDate} />
+      <CalenderView selectedDate={selectedDate} />
+    </Stack>
   );
 }
