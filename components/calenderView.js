@@ -48,7 +48,7 @@ const CalenderView = ({ selectedDate }) => {
   console.log("data with user info", dataWithUserInfo);
 
   return (
-    <Stack align="center" spacing={0} w={300}>
+    <Stack align="center" spacing={0} w={"100%"}>
       <Text fw={600} fz="xs" c="dimmed">
         VIEW
       </Text>
