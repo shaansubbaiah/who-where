@@ -16,7 +16,7 @@ const CalenderView = ({ selectedDate }) => {
       </Center>
     );
 
-  console.log(data);
+  //   console.log(data);
 
   let dataForSelectedDate = data.content.voteData.filter(
     (e) => e.date == dayjs(selectedDate).format("DD/MM/YYYY")
@@ -45,7 +45,7 @@ const CalenderView = ({ selectedDate }) => {
   let atChennai = dataWithUserInfo.filter((e) => e.location == "Chennai");
   let atHome = dataWithUserInfo.filter((e) => e.location == "Home");
 
-  console.log("data with user info", dataWithUserInfo);
+  //   console.log("data with user info", dataWithUserInfo);
 
   return (
     <Stack align="center" spacing={0} w={"100%"}>
