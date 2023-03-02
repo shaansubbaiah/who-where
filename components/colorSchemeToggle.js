@@ -7,7 +7,7 @@ const ColorSchemeToggle = () => {
 
   return (
     <ActionIcon
-      variant="subtle"
+      variant="light"
       size={26}
       color={dark ? "yellow" : "blue"}
       onClick={() => toggleColorScheme()}

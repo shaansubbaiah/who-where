@@ -2,6 +2,7 @@ import useSWR from "swr";
 import { Text, Paper, Stack, Center, Loader } from "@mantine/core";
 import dayjs from "dayjs";
 import LocationGrid from "./locationGrid";
+import locations from "./locations";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -40,10 +41,15 @@ const CalenderView = ({ selectedDate }) => {
     });
   });
 
-  let atEGL = dataWithUserInfo.filter((e) => e.location == "EGL");
-  let atManyata = dataWithUserInfo.filter((e) => e.location == "Manyata");
-  let atChennai = dataWithUserInfo.filter((e) => e.location == "Chennai");
-  let atHome = dataWithUserInfo.filter((e) => e.location == "Home");
+  // let atEGL = dataWithUserInfo.filter((e) => e.location == "EGL");
+  // let atManyata = dataWithUserInfo.filter((e) => e.location == "Manyata");
+  // let atChennai = dataWithUserInfo.filter((e) => e.location == "Chennai");
+  // let atHome = dataWithUserInfo.filter((e) => e.location == "Home");
+
+  const locationData = locations.map((loc) => ({
+    votes: dataWithUserInfo.filter((e) => e.location == loc.name),
+    ...loc,
+  }));
 
   //   console.log("data with user info", dataWithUserInfo);
 
@@ -52,12 +58,22 @@ const CalenderView = ({ selectedDate }) => {
       <Text fw={600} fz="xs" c="dimmed">
         VIEW
       </Text>
-      <Paper radius="lg" p="md" withBorder w="inherit">
+      <Paper p="md" withBorder w="inherit">
         <Stack>
-          <LocationGrid placeName="EGL" data={atEGL} />
+          {locationData.map((e) => {
+            return (
+              <LocationGrid
+                placeName={e.name}
+                data={e.votes}
+                color={e.color}
+                key={e.name}
+              />
+            );
+          })}
+          {/* <LocationGrid placeName="EGL" data={atEGL} />
           <LocationGrid placeName="Manyata" data={atManyata} />
           <LocationGrid placeName="Chennai" data={atChennai} />
-          <LocationGrid placeName="Home" data={atHome} />
+          <LocationGrid placeName="Home" data={atHome} /> */}
         </Stack>
       </Paper>
     </Stack>
