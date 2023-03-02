@@ -41,10 +41,10 @@ const CalenderView = ({ selectedDate }) => {
     });
   });
 
-  let atEGL = dataWithUserInfo.filter((e) => e.location == "EGL");
-  let atManyata = dataWithUserInfo.filter((e) => e.location == "Manyata");
-  let atChennai = dataWithUserInfo.filter((e) => e.location == "Chennai");
-  let atHome = dataWithUserInfo.filter((e) => e.location == "Home");
+  // let atEGL = dataWithUserInfo.filter((e) => e.location == "EGL");
+  // let atManyata = dataWithUserInfo.filter((e) => e.location == "Manyata");
+  // let atChennai = dataWithUserInfo.filter((e) => e.location == "Chennai");
+  // let atHome = dataWithUserInfo.filter((e) => e.location == "Home");
 
   const locationData = locations.map((loc) => ({
     votes: dataWithUserInfo.filter((e) => e.location == loc.name),
@@ -58,7 +58,7 @@ const CalenderView = ({ selectedDate }) => {
       <Text fw={600} fz="xs" c="dimmed">
         VIEW
       </Text>
-      <Paper radius="lg" p="md" withBorder w="inherit">
+      <Paper p="md" withBorder w="inherit">
         <Stack>
           {locationData.map((e) => {
             return (

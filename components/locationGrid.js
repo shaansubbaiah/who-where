@@ -10,7 +10,7 @@ import {
 
 const LocationGrid = ({ data, placeName, color }) => {
   return (
-    <Stack align="center">
+    <Stack align="center" mb={20}>
       <Badge size="sm" radius="sm" color={color}>
         {placeName}
       </Badge>
