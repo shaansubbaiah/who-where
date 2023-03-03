@@ -1,5 +1,13 @@
 import useSWR from "swr";
-import { Paper, Stack, Center, Loader } from "@mantine/core";
+import {
+  Paper,
+  Stack,
+  Center,
+  Loader,
+  Text,
+  Progress,
+  useMantineTheme,
+} from "@mantine/core";
 import dayjs from "dayjs";
 import LocationGrid from "./locationGrid";
 import locations from "./locations";
@@ -10,7 +18,10 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const CalenderView = ({ selectedDate }) => {
   const { data, error, isLoading } = useSWR("/api/vote", fetcher);
 
-  if (error) return <div>I messed up, failed to load</div>;
+  const theme = useMantineTheme();
+
+  if (error)
+    return <Text align="center">I f&apos;d up, it failed to load</Text>;
   if (isLoading)
     return (
       <Center>
@@ -49,12 +60,22 @@ const CalenderView = ({ selectedDate }) => {
 
   //   console.log("data with user info", dataWithUserInfo);
 
-  // console.log("loc data", locationData);
+  console.log("loc data", locationData);
   let votesAvailable = false;
   locationData.forEach((e) => {
     if (e.votes.length > 0) votesAvailable = true;
   });
   // console.log("votes there?", votesAvailable);
+
+  let totalVotes = 0;
+  locationData.forEach((e) => {
+    totalVotes += e.votes.length;
+  });
+
+  locationData.forEach((e) => {
+    e.voteFraction = (e.votes.length / totalVotes) * 100;
+  });
+  console.log("votesplit", locationData);
 
   return (
     <Stack align="center" spacing={0} w={"100%"}>
@@ -65,6 +86,16 @@ const CalenderView = ({ selectedDate }) => {
           <Center m="50px auto">💀</Center>
         ) : (
           <Stack>
+            <Progress
+              mb={20}
+              sections={locationData.map((e) => ({
+                value: e.voteFraction,
+                color:
+                  theme.colorScheme == "dark"
+                    ? theme.colors[e.color][4]
+                    : e.color,
+              }))}
+            />
             {locationData.map((e) => {
               return (
                 <LocationGrid

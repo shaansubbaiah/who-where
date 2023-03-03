@@ -53,8 +53,8 @@ export default function Home() {
           <DatePicker
             placeholder="Pick a date :)"
             withAsterisk
-            minDate={dayjs(new Date()).toDate()}
-            maxDate={dayjs(new Date()).add(90, "day").toDate()}
+            minDate={dayjs(new Date()).subtract(1, "month").toDate()}
+            maxDate={dayjs(new Date()).add(2, "month").toDate()}
             value={selectedDate}
             onChange={onSelectedDateChange}
             icon={<IconCalendar size={24} />}
@@ -69,6 +69,11 @@ export default function Home() {
 
         {/* About Section  */}
         <About />
+
+        {/* Me :)  */}
+        <Text fz="sm" c="dimmed" align="center">
+          © Shaan Subbaiah, 2023
+        </Text>
       </Stack>
     </>
   );
