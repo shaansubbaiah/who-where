@@ -1,19 +1,11 @@
+import { useState } from "react";
+import { mutate } from "swr";
 import { useSession } from "next-auth/react";
-import {
-  Select,
-  Text,
-  Stack,
-  Center,
-  Flex,
-  Button,
-  createStyles,
-} from "@mantine/core";
+import { Select, Text, Stack, Flex, Button, createStyles } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { IconMapPin } from "@tabler/icons";
 import dayjs from "dayjs";
 import locations from "./locations";
-import { useState } from "react";
-import { mutate } from "swr";
 import SmolHeading from "./smolHeading";
 
 const useStyles = createStyles((theme) => ({
@@ -58,14 +50,13 @@ const VoteBox = ({ selectedDate }) => {
 
         <form
           onSubmit={form.onSubmit(async (values) => {
-            console.log(selectedDate);
-            // setIsSubmitting(true);
-            // let formData = values;
-            // formData.date = dayjs(selectedDate).format("DD/MM/YYYY");
-            // await postData(formData);
+            setIsSubmitting(true);
+            let formData = values;
+            formData.date = dayjs(selectedDate).format("DD/MM/YYYY");
+            await postData(formData);
             // console.log(formData);
-            // setIsSubmitting(false);
-            // mutate("/api/vote");
+            setIsSubmitting(false);
+            mutate("/api/vote");
           })}
           className={classes.fullWidth}
         >
@@ -80,27 +71,10 @@ const VoteBox = ({ selectedDate }) => {
               placeholder="Pick a location"
               disabled={selectedDate == null}
               icon={<IconMapPin size={24} />}
-              data={
-                selectData
-                //   [
-                //   { value: "Manyata", label: "BLR: Manyata" },
-                //   { value: "EGL", label: "BLR: EGL" },
-                //   { value: "Chennai", label: "CHN: Neville" },
-                //   { value: "Home", label: "WFH: Home" },
-                // ]
-              }
+              data={selectData}
               {...form.getInputProps("location")}
             />
 
-            {/* <ActionIcon
-              component="button"
-              type="submit"
-              variant="light"
-              color="teal"
-              size={36}
-            >
-              <IconCheck />
-            </ActionIcon> */}
             <Button
               variant="light"
               type="submit"

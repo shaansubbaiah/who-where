@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { Text, Paper, Stack, Center, Loader } from "@mantine/core";
+import { Paper, Stack, Center, Loader } from "@mantine/core";
 import dayjs from "dayjs";
 import LocationGrid from "./locationGrid";
 import locations from "./locations";
@@ -42,11 +42,6 @@ const CalenderView = ({ selectedDate }) => {
     });
   });
 
-  // let atEGL = dataWithUserInfo.filter((e) => e.location == "EGL");
-  // let atManyata = dataWithUserInfo.filter((e) => e.location == "Manyata");
-  // let atChennai = dataWithUserInfo.filter((e) => e.location == "Chennai");
-  // let atHome = dataWithUserInfo.filter((e) => e.location == "Home");
-
   const locationData = locations.map((loc) => ({
     votes: dataWithUserInfo.filter((e) => e.location == loc.name),
     ...loc,
@@ -54,12 +49,19 @@ const CalenderView = ({ selectedDate }) => {
 
   //   console.log("data with user info", dataWithUserInfo);
 
+  // console.log("loc data", locationData);
+  let votesAvailable = false;
+  locationData.forEach((e) => {
+    if (e.votes.length > 0) votesAvailable = true;
+  });
+  // console.log("votes there?", votesAvailable);
+
   return (
     <Stack align="center" spacing={0} w={"100%"}>
       <SmolHeading text="VIEW" />
 
       <Paper p="md" withBorder w="inherit">
-        {selectedDate == null ? (
+        {selectedDate == null || !votesAvailable ? (
           <Center m="50px auto">💀</Center>
         ) : (
           <Stack>
@@ -73,10 +75,6 @@ const CalenderView = ({ selectedDate }) => {
                 />
               );
             })}
-            {/* <LocationGrid placeName="EGL" data={atEGL} />
-          <LocationGrid placeName="Manyata" data={atManyata} />
-          <LocationGrid placeName="Chennai" data={atChennai} />
-          <LocationGrid placeName="Home" data={atHome} /> */}
           </Stack>
         )}
       </Paper>

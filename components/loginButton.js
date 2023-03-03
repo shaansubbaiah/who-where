@@ -1,5 +1,5 @@
 import { useSession, signIn, signOut } from "next-auth/react";
-import { Button, ActionIcon, Group, Text } from "@mantine/core";
+import { Button, ActionIcon, Group } from "@mantine/core";
 import { IconLogout } from "@tabler/icons";
 
 const LoginButton = () => {

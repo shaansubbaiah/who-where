@@ -1,12 +1,4 @@
-import {
-  Text,
-  Avatar,
-  Tooltip,
-  Stack,
-  SimpleGrid,
-  Flex,
-  Badge,
-} from "@mantine/core";
+import { Text, Avatar, Tooltip, Stack, Flex, Badge } from "@mantine/core";
 
 const LocationGrid = ({ data, placeName, color }) => {
   if (data.length == 0) return null;
@@ -24,7 +16,6 @@ const LocationGrid = ({ data, placeName, color }) => {
         direction="row"
         wrap="wrap"
       >
-        {/* {data.length > 0 ?  */}
         {data.map((e) => {
           return (
             <Stack key={e.id} align="center" spacing={5} m={5}>
@@ -39,16 +30,6 @@ const LocationGrid = ({ data, placeName, color }) => {
             </Stack>
           );
         })}
-        {/* : (
-          <Stack align="center" spacing={0}>
-            <Tooltip label="Nobody">
-              <Avatar src={null} alt="Empty profile" color="green" radius="xl">
-                🦗
-              </Avatar>
-            </Tooltip>
-            <Text fz="sm">...</Text>
-          </Stack>
-        ) */}
       </Flex>
     </Stack>
   );
