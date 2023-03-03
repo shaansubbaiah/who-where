@@ -20,7 +20,8 @@ const CalenderView = ({ selectedDate }) => {
 
   const theme = useMantineTheme();
 
-  if (error) return <Text align="center">I f'd up, it failed to load</Text>;
+  if (error)
+    return <Text align="center">I f&apos;d up, it failed to load</Text>;
   if (isLoading)
     return (
       <Center>
