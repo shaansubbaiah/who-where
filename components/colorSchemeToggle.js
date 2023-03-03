@@ -8,12 +8,12 @@ const ColorSchemeToggle = () => {
   return (
     <ActionIcon
       variant="light"
-      size={26}
+      size={36}
       color={dark ? "yellow" : "blue"}
       onClick={() => toggleColorScheme()}
       title="Toggle color scheme"
     >
-      {dark ? <IconSun size={18} /> : <IconMoonStars size={18} />}
+      {dark ? <IconSun size={24} /> : <IconMoonStars size={24} />}
     </ActionIcon>
   );
 };

@@ -2,6 +2,8 @@ import { MantineProvider, ColorSchemeProvider } from "@mantine/core";
 import { useHotkeys, useLocalStorage } from "@mantine/hooks";
 import { SessionProvider } from "next-auth/react";
 
+import "@fontsource/rubik/variable.css";
+
 export default function App(props) {
   const { Component, pageProps, session } = props;
   const [colorScheme, setColorScheme] = useLocalStorage({
@@ -23,7 +25,11 @@ export default function App(props) {
         toggleColorScheme={toggleColorScheme}
       >
         <MantineProvider
-          theme={{ colorScheme }}
+          theme={{
+            colorScheme,
+            fontFamily: "RubikVariable",
+            headings: { fontFamily: "RubikVariable" },
+          }}
           withGlobalStyles
           withNormalizeCSS
         >

@@ -1,5 +1,5 @@
 import { useSession, signIn, signOut } from "next-auth/react";
-import { Button, ActionIcon, Group, Text } from "@mantine/core";
+import { Button, ActionIcon, Group } from "@mantine/core";
 import { IconLogout } from "@tabler/icons";
 
 const LoginButton = () => {
@@ -8,21 +8,21 @@ const LoginButton = () => {
     // console.log(session);
     return (
       <Group>
-        <Text fz="sm">Hi, {session.user.name.split(" ")[0]} 👋</Text>
         <ActionIcon
           variant="light"
           color="red"
+          size={36}
           onClick={() => signOut()}
           title="Sign Out"
         >
-          <IconLogout size={18} />
+          <IconLogout size={24} />
         </ActionIcon>
       </Group>
     );
   }
   return (
     <Group>
-      <Button compact variant="light" color="blue" onClick={() => signIn()}>
+      <Button variant="light" color="blue" onClick={() => signIn()}>
         Sign in
       </Button>
     </Group>
