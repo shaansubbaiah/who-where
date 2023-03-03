@@ -3,6 +3,7 @@ import { Text, Paper, Stack, Center, Loader } from "@mantine/core";
 import dayjs from "dayjs";
 import LocationGrid from "./locationGrid";
 import locations from "./locations";
+import SmolHeading from "./smolHeading";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -55,26 +56,29 @@ const CalenderView = ({ selectedDate }) => {
 
   return (
     <Stack align="center" spacing={0} w={"100%"}>
-      <Text fw={600} fz="xs" c="dimmed">
-        VIEW
-      </Text>
+      <SmolHeading text="VIEW" />
+
       <Paper p="md" withBorder w="inherit">
-        <Stack>
-          {locationData.map((e) => {
-            return (
-              <LocationGrid
-                placeName={e.name}
-                data={e.votes}
-                color={e.color}
-                key={e.name}
-              />
-            );
-          })}
-          {/* <LocationGrid placeName="EGL" data={atEGL} />
+        {selectedDate == null ? (
+          <Center m="50px auto">💀</Center>
+        ) : (
+          <Stack>
+            {locationData.map((e) => {
+              return (
+                <LocationGrid
+                  placeName={e.name}
+                  data={e.votes}
+                  color={e.color}
+                  key={e.name}
+                />
+              );
+            })}
+            {/* <LocationGrid placeName="EGL" data={atEGL} />
           <LocationGrid placeName="Manyata" data={atManyata} />
           <LocationGrid placeName="Chennai" data={atChennai} />
           <LocationGrid placeName="Home" data={atHome} /> */}
-        </Stack>
+          </Stack>
+        )}
       </Paper>
     </Stack>
   );

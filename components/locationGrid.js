@@ -9,9 +9,11 @@ import {
 } from "@mantine/core";
 
 const LocationGrid = ({ data, placeName, color }) => {
+  if (data.length == 0) return null;
+
   return (
     <Stack align="center" mb={20}>
-      <Badge size="sm" radius="sm" color={color}>
+      <Badge radius="sm" color={color} variant="light">
         {placeName}
       </Badge>
       <Flex
@@ -22,22 +24,22 @@ const LocationGrid = ({ data, placeName, color }) => {
         direction="row"
         wrap="wrap"
       >
-        {data.length > 0 ? (
-          data.map((e) => {
-            return (
-              <Stack key={e.id} align="center" spacing={5} m={5}>
-                <Tooltip label={e.name} withArrow>
-                  <Avatar
-                    src={e.image}
-                    alt={e.name}
-                    referrerPolicy="no-referrer"
-                  />
-                </Tooltip>
-                <Text fz="sm">{e.name.split(" ")[0]}</Text>
-              </Stack>
-            );
-          })
-        ) : (
+        {/* {data.length > 0 ?  */}
+        {data.map((e) => {
+          return (
+            <Stack key={e.id} align="center" spacing={5} m={5}>
+              <Tooltip label={e.name} withArrow>
+                <Avatar
+                  src={e.image}
+                  alt={e.name}
+                  referrerPolicy="no-referrer"
+                />
+              </Tooltip>
+              <Text fz="sm">{e.name.split(" ")[0]}</Text>
+            </Stack>
+          );
+        })}
+        {/* : (
           <Stack align="center" spacing={0}>
             <Tooltip label="Nobody">
               <Avatar src={null} alt="Empty profile" color="green" radius="xl">
@@ -46,7 +48,7 @@ const LocationGrid = ({ data, placeName, color }) => {
             </Tooltip>
             <Text fz="sm">...</Text>
           </Stack>
-        )}
+        ) */}
       </Flex>
     </Stack>
   );
