@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { Paper, Stack, Center, Loader } from "@mantine/core";
+import { Paper, Stack, Center, Loader, Text } from "@mantine/core";
 import dayjs from "dayjs";
 import LocationGrid from "./locationGrid";
 import locations from "./locations";
@@ -10,7 +10,7 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const CalenderView = ({ selectedDate }) => {
   const { data, error, isLoading } = useSWR("/api/vote", fetcher);
 
-  if (error) return <div>I messed up, failed to load</div>;
+  if (error) return <Text align="center">I f'd up, it failed to load</Text>;
   if (isLoading)
     return (
       <Center>
