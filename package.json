@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/server": "^11.10.0",
+    "@fontsource/rubik": "^4.5.14",
     "@mantine/core": "^5.10.5",
     "@mantine/dates": "^5.10.5",
     "@mantine/form": "^5.10.5",
