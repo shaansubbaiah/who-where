@@ -26,6 +26,8 @@ export default function Home() {
       <Head>
         <title>Who, Where?</title>
         <meta property="og:title" content="Who, Where?" key="title" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
 
       <Stack m={"10px 10px 40px 10px"} spacing={32}>
