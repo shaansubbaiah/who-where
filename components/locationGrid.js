@@ -1,5 +1,17 @@
 import { Text, Avatar, Tooltip, Stack, Flex, Badge } from "@mantine/core";
 
+// SEE https://stackoverflow.com/a/66239174
+const getInitials = (fullName) => {
+  const allNames = fullName.trim().split(" ");
+  const initials = allNames.reduce((acc, curr, index) => {
+    if (index === 0 || index === allNames.length - 1) {
+      acc = `${acc}${curr.charAt(0).toUpperCase()}`;
+    }
+    return acc;
+  }, "");
+  return initials;
+};
+
 const LocationGrid = ({ data, placeName, color }) => {
   if (data.length == 0) return null;
 
@@ -24,7 +36,10 @@ const LocationGrid = ({ data, placeName, color }) => {
                   src={e.image}
                   alt={e.name}
                   referrerPolicy="no-referrer"
-                />
+                  color={color}
+                >
+                  {getInitials(e.name)}
+                </Avatar>
               </Tooltip>
               <Text fz="sm">{e.name.split(" ")[0]}</Text>
             </Stack>
