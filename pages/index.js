@@ -12,14 +12,33 @@ import LoginButton from "@/components/loginButton";
 import SmolHeading from "@/components/smolHeading";
 import About from "@/components/about";
 
+const getNearestWeekday = () => {
+  let today = new Date();
+  // if Sunday, add 1 to return Monday
+  if (today.getDay() === 0) {
+    return dayjs(today).add(1, "day").toDate();
+  }
+  // if Saturday, add 2 to return Monday
+  else if (today.getDay() === 6) {
+    return dayjs(today).add(2, "day").toDate();
+  }
+  // else today is G
+  else return today;
+};
+
 export default function Home() {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(getNearestWeekday());
 
   const { data: session } = useSession();
 
   const onSelectedDateChange = (value) => {
     setSelectedDate(value);
   };
+
+  console.info(
+    "%cOH YOU NAUGHTY NAUGHTY",
+    "margin:8px 0;font-family:sans-serif;font-weight:600;font-size:60px;color:violet;"
+  );
 
   return (
     <>
@@ -63,6 +82,7 @@ export default function Home() {
             withAsterisk
             minDate={dayjs(new Date()).subtract(1, "month").toDate()}
             maxDate={dayjs(new Date()).add(2, "month").toDate()}
+            excludeDate={(date) => date.getDay() === 0 || date.getDay() === 6}
             value={selectedDate}
             onChange={onSelectedDateChange}
             icon={<IconCalendar size={24} />}
