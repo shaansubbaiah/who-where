@@ -9,7 +9,7 @@ const About = () => {
       <SmolHeading text="ABOUT" />
       <Paper p="md" withBorder w="inherit">
         <Stack align="center" spacing={40}>
-          <Text fz="sm">POC to test SSO with NextAuth.</Text>
+          <Text>POC to test SSO with NextAuth.</Text>
 
           <Group position="center" spacing={30}>
             <Group spacing={5}>
@@ -19,7 +19,7 @@ const About = () => {
           </Group>
 
           <Stack align="center" spacing={0}>
-            <Text fz="sm">Built With</Text>
+            <Text>Built With</Text>
             <Group spacing={5} position="center">
               <Text fz="sm">NextJS</Text>
               <Text fz="sm" c="dimmed">

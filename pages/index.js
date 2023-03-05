@@ -30,7 +30,14 @@ export default function Home() {
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
 
-      <Stack m={"10px 10px 40px 10px"} spacing={32}>
+      <Stack
+        m={"0 auto"}
+        p={"10px 10px 40px 10px"}
+        spacing={32}
+        sx={{
+          maxWidth: "500px",
+        }}
+      >
         {/* Titlebar and navigation  */}
         <Group position="apart">
           <ColorSchemeToggle />
@@ -40,9 +47,10 @@ export default function Home() {
 
         {/* Greeter  */}
         {session ? (
-          <Text align="center">
-            Signed in as {session.user.name.split(" ")[0]}
-          </Text>
+          <Group position="center" spacing={5}>
+            <Text>Signed in as</Text>
+            <Text color="blue">{session.user.name.split(" ")[0]}</Text>
+          </Group>
         ) : (
           <></>
         )}
@@ -58,6 +66,7 @@ export default function Home() {
             value={selectedDate}
             onChange={onSelectedDateChange}
             icon={<IconCalendar size={24} />}
+            size="md"
           />
         </Stack>
 

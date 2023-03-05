@@ -22,8 +22,15 @@ const LoginButton = () => {
   }
   return (
     <Group>
-      <Button variant="light" color="blue" onClick={() => signIn()}>
-        Sign in
+      <Button
+        variant="light"
+        color="blue"
+        onClick={() => signIn()}
+        sx={{
+          padding: "5px",
+        }}
+      >
+        Login
       </Button>
     </Group>
   );

@@ -3,7 +3,7 @@ import { mutate } from "swr";
 import { useSession } from "next-auth/react";
 import { Select, Text, Stack, Flex, Button, createStyles } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { IconMapPin } from "@tabler/icons";
+import { IconCheck, IconMapPin } from "@tabler/icons";
 import dayjs from "dayjs";
 import locations from "./locations";
 import SmolHeading from "./smolHeading";
@@ -72,6 +72,7 @@ const VoteBox = ({ selectedDate }) => {
               disabled={selectedDate == null}
               icon={<IconMapPin size={24} />}
               data={selectData}
+              size="md"
               {...form.getInputProps("location")}
             />
 
@@ -79,8 +80,13 @@ const VoteBox = ({ selectedDate }) => {
               variant="light"
               type="submit"
               color="teal"
+              size="md"
+              sx={{
+                flexGrow: 1,
+              }}
               loading={isSubmitting}
               disabled={selectedDate == null}
+              leftIcon={<IconCheck />}
             >
               Submit
             </Button>

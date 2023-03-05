@@ -3,10 +3,10 @@ import {
   Paper,
   Stack,
   Center,
-  Loader,
   Text,
   Progress,
   useMantineTheme,
+  Skeleton,
 } from "@mantine/core";
 import dayjs from "dayjs";
 import LocationGrid from "./locationGrid";
@@ -24,9 +24,19 @@ const CalenderView = ({ selectedDate }) => {
     return <Text align="center">I f&apos;d up, it failed to load</Text>;
   if (isLoading)
     return (
-      <Center>
-        <Loader />
-      </Center>
+      <Paper
+        p="md"
+        withBorder
+        w="inherit"
+        sx={{
+          height: "160px",
+        }}
+      >
+        <Stack justify="space-between" spacing="xl">
+          <Skeleton height={50} animate />
+          <Skeleton height={50} animate />
+        </Stack>
+      </Paper>
     );
 
   //   console.log(data);
@@ -34,7 +44,7 @@ const CalenderView = ({ selectedDate }) => {
   let dataForSelectedDate = data.content.voteData.filter(
     (e) => e.date == dayjs(selectedDate).format("DD/MM/YYYY")
   );
-  //   console.log("data for selected date", dataForSelectedDate);
+  // console.log("data for selected date", dataForSelectedDate);
 
   let dataWithUserInfo = [];
 
@@ -58,32 +68,36 @@ const CalenderView = ({ selectedDate }) => {
     ...loc,
   }));
 
-  //   console.log("data with user info", dataWithUserInfo);
+  // console.log("data with user info", dataWithUserInfo);
 
-  console.log("loc data", locationData);
+  // console.log("loc data", locationData);
   let votesAvailable = false;
-  locationData.forEach((e) => {
-    if (e.votes.length > 0) votesAvailable = true;
-  });
-  // console.log("votes there?", votesAvailable);
-
   let totalVotes = 0;
   locationData.forEach((e) => {
+    if (e.votes.length > 0) votesAvailable = true;
     totalVotes += e.votes.length;
   });
+  // console.log("votes there?", votesAvailable);
 
   locationData.forEach((e) => {
     e.voteFraction = (e.votes.length / totalVotes) * 100;
   });
-  console.log("votesplit", locationData);
+  // console.log("votesplit", locationData);
 
   return (
     <Stack align="center" spacing={0} w={"100%"}>
       <SmolHeading text="VIEW" />
 
-      <Paper p="md" withBorder w="inherit">
+      <Paper
+        p="md"
+        withBorder
+        w="inherit"
+        sx={{
+          minHeight: "160px",
+        }}
+      >
         {selectedDate == null || !votesAvailable ? (
-          <Center m="50px auto">💀</Center>
+          <Center sx={{ height: "126px" }}>💀</Center>
         ) : (
           <Stack>
             <Progress
