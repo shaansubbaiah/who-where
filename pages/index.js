@@ -14,6 +14,9 @@ import About from "@/components/about";
 
 const getNearestWeekday = () => {
   let today = new Date();
+  // Add 6 hours, we don't care who's where after 6pm
+  today = dayjs(today).add(6, "hour").toDate();
+
   // if Sunday, add 1 to return Monday
   if (today.getDay() === 0) {
     return dayjs(today).add(1, "day").toDate();
