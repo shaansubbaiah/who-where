@@ -30,7 +30,8 @@ const getNearestWeekday = () => {
 };
 
 export default function Home() {
-  const [selectedDate, setSelectedDate] = useState(getNearestWeekday());
+  const nearestWeekday = getNearestWeekday();
+  const [selectedDate, setSelectedDate] = useState(nearestWeekday);
 
   const { data: session } = useSession();
 
@@ -103,7 +104,7 @@ export default function Home() {
         </Stack>
 
         {/* Vote Section */}
-        <VoteBox selectedDate={selectedDate} />
+        <VoteBox selectedDate={selectedDate} nearestWeekday={nearestWeekday} />
 
         {/* View Section  */}
         <CalenderView selectedDate={selectedDate} />
