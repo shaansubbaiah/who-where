@@ -20,7 +20,7 @@ const selectData = locations.map((e) => {
   return { value: e.name, label: e.label };
 });
 
-const VoteBox = ({ selectedDate }) => {
+const VoteBox = ({ selectedDate, nearestWeekday }) => {
   const { data: session } = useSession();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -85,7 +85,15 @@ const VoteBox = ({ selectedDate }) => {
                 flexGrow: 1,
               }}
               loading={isSubmitting}
-              disabled={selectedDate == null}
+              // disable voting when selected date is null for some reason
+              //                          (or)
+              // if the date selected is in the past / before the current
+              // nearest weekday
+              disabled={
+                selectedDate == null ||
+                selectedDate.setHours(0, 0, 0, 0) <
+                  nearestWeekday.setHours(0, 0, 0, 0)
+              }
               leftIcon={<IconCheck />}
             >
               Submit
