@@ -71,7 +71,16 @@ export default function Home() {
         {session ? (
           <Group position="center" spacing={5}>
             <Text>Signed in as</Text>
-            <Text color="blue">{session.user.name.split(" ")[0]}</Text>
+            <Text
+              sx={(theme) => ({
+                color:
+                  theme.colorScheme == "dark"
+                    ? theme.colors.blue[3]
+                    : theme.colors.blue[8],
+              })}
+            >
+              {session.user.name.split(" ")[0]}
+            </Text>
           </Group>
         ) : (
           <></>
